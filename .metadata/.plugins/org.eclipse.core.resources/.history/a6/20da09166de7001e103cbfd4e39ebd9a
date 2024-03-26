@@ -1,0 +1,141 @@
+/*
+ * receive.c
+ *
+ *  Created on: Mar 20, 2024
+ *      Author: Sayed
+ */
+
+#include "GPIO_driver.h"
+#include "RCC_driver.h"
+#include "USART_driver.h"
+#include "bsp.h"
+#include "string.h"
+#include "Timer_Driver.h"
+#include <stdio.h>
+
+static void CANInit();
+static void CANRxconfig();
+static void ReadFIFO();
+static void UARTConfig();
+const uint32_t TICKS = 1U;
+uint32_t numTicks;
+const float speedOfSound = 0.00343/2;
+float distance;
+char uartBuf[100];
+
+USART_Handle_t hUART;
+uint32_t data[8];
+int main(void){
+
+	//enable floating point full access
+	SCB->CPACR |= ((3UL << 20U)|(3UL << 22U));
+
+	GPIO_CAN1Init(GPIOA, GPIO_PIN_NO_11, 9);
+	GPIO_CAN1Init(GPIOA, GPIO_PIN_NO_12, 9);
+	GPIO_LEDInit();
+	CANInit();
+	CANRxconfig();
+	systick_init(TICKS);
+	//enter normal mode
+	CAN1 ->MCR &= ~(1 << 0);
+	//wait until CAN is in normal mode
+	while(CAN1 ->MSR & (1 << 0));
+
+	//configuring the UART peripheral
+	UARTConfig();
+	//initializing UART2 Pins
+	USART_GPIOInit(GPIOA,GPIO_PIN_NO_2,7);  /*TX*/
+	USART_GPIOInit(GPIOA,GPIO_PIN_NO_3,7);  /*RX*/
+
+	while(1){
+		delay(50);
+		distance = (numTicks + 0.0f)*2.8*speedOfSound;
+		sprintf(uartBuf, "Distance (m)  = %.1f\r\n", distance);
+		USART_SendData(&hUART, (uint8_t *)uartBuf, sizeof(uartBuf));  /*sending the data*/
+	}
+}
+static void ReadFIFO(){
+	uint32_t dataLength = (CAN1->sFIFOMailBox[0].RDTR & 0xF);
+	for(uint8_t i = 0; i < dataLength; i++){
+		if(i < 4){
+			data[i] = (CAN1 ->sFIFOMailBox[0].RDLR >> (i * 8)) & 0xFFU;
+		}else{
+			data[i] = (CAN1 ->sFIFOMailBox[0].RDHR >> ((i - 4) * 8)) & 0xFFU;
+		}
+	}
+	numTicks = data[0] | (data[1] << 8);
+	//release the FIFO
+	CAN1 ->RF0R |= (1U << 5);
+}
+
+static void CANInit(){
+	//enable the clock for the bus
+	RCC ->APB1ENR |= (1 << RCC_APB1ENR_CAN1EN);
+	//clear sleep bit in MCR
+	CAN1 ->MCR &= ~(1U << 1);
+	//initialize the CAN bus
+	CAN1 ->MCR |= (1 << 0);
+	//wait until CAN enters initialization mode
+	while(! (CAN1 ->MSR & (1 << 0)));
+	CAN1 ->BTR &= 0x00000000U;
+	CAN1 ->BTR |= (1U << 24);//SWj
+	CAN1 ->BTR |= (13U << 16);//seg1
+	CAN1 ->BTR |= (2U << 20);//seg2
+	CAN1 ->BTR |= (2U << 0);//BRP
+}
+static void CANRxconfig(){
+	//configure the filter banks to accept all IDs
+	//initialize the filter bank
+	CAN1 ->FMR |= (1U << 0);
+	//enable interrupt for pending messages on FIFO 0
+	CAN1 ->IER |= (1U << 1);
+	//enable NVIC interrupt for CAN RX (IRQ no. 20) ISER0;
+	*ISER0 |= (1U << 20);
+	//set it to MASK MODE
+	CAN1 ->FM1R &= ~(1 << 0);
+	//use single 32bit register
+	CAN1 ->FS1R |= (1 << 0);
+	//assign the message to FIFO 0
+	CAN1 ->FFA1R &= ~(1U << 0);
+	//set the ID in the filter bank
+	CAN1 ->sFilterRegister[0].FR1 = 0x55U << 5;
+	//set the MASK
+	CAN1 ->sFilterRegister[0].FR2 = 0x7FFU << 5;
+	//activate the filter
+	CAN1 ->FMR &= ~(1U << 0);
+	CAN1 ->FA1R |= (1U << 0);
+}
+
+
+static void UARTConfig(){
+	hUART.pUSARTx = USART2;
+	hUART.USART_Config.USART_Baud = USART_STD_BAUD_115200;
+	hUART.USART_Config.USART_NoOfStopBits = USART_STOPBITS_1;
+	hUART.USART_Config.USART_ParityControl = USART_PARITY_DISABLE;
+	hUART.USART_Config.USART_Mode = USART_MODE_TXRX;
+	hUART.USART_Config.USART_WordLength = USART_WORDLEN_8BITS;
+	USART_Init(&hUART);
+}
+
+void CAN1_RX0_IRQHandler(void){
+	__asm(
+			"CPSID I  \n"
+	);
+	*ICPR0 |= (1U << 20);
+	ReadFIFO();
+	uint32_t distance = data[0] | (data[1] << 8);
+	SysTick ->RVR = distance * 7989U;
+	__asm(
+			"CPSIE I  \n"
+	);
+}
+
+void SysTick_Handler(){
+	__asm(
+			"CPSID I  \n"
+	);
+	GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_5);
+	__asm(
+			"CPSIE I  \n"
+	);
+}

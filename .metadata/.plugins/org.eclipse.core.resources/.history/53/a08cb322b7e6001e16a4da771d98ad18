@@ -1,0 +1,43 @@
+/*
+ * main.c
+ *
+ *  Created on: Mar 14, 2024
+ *      Author: Sayed
+ */
+#include "GPIO_driver.h"
+#include "RCC_driver.h"
+#include "bsp.h"
+#include "string.h"
+#include "Timer_Driver.h"
+#include <stdio.h>
+
+char message[] = {'H','E','L','L','O','\r','\n'};
+uint16_t ID = 0x55U;
+uint8_t size = sizeof(message);
+
+int main(void){
+/*configuration starts here*/
+	//enable the clock for the bust
+	RCC ->APB1ENR |= (1 << RCC_APB1ENR_CAN1EN);
+	//initialize the CAN bus
+	CAN1 ->MCR |= (1 << 0);
+	//wait until BUS is in initialization mode
+	while(! (CAN1 ->MSR & (1 << 0)));
+
+/*Configuration ends here*/
+
+/*Initialization starts here*/
+
+	/*initializing interrupts for Timer1, Timer2 and Echo pin*/
+
+/*Initialization ends here*/
+
+
+/*Code starts here*/
+	while(1){
+
+	}
+
+/*Code ends here*/
+}
+

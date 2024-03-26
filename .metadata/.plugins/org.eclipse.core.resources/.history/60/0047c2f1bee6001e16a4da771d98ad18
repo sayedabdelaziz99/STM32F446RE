@@ -1,0 +1,54 @@
+/*
+ * main.c
+ *
+ *  Created on: Mar 14, 2024
+ *      Author: Sayed
+ */
+#include "GPIO_driver.h"
+#include "RCC_driver.h"
+#include "bsp.h"
+#include "string.h"
+#include "Timer_Driver.h"
+#include <stdio.h>
+
+char message[] = {'H','E','L','L','O','\r','\n'};
+uint16_t ID = 0x55U;
+uint8_t size = sizeof(message);
+
+int main(void){
+	//enable the clock for the bust
+	RCC ->APB1ENR |= (1 << RCC_APB1ENR_CAN1EN);
+	//initialize the CAN bus
+	CAN1 ->MCR |= (1 << 0);
+	//wait until CAN enters initialization mode
+	while(! (CAN1 ->MSR & (1 << 0)));
+	//configure the timings
+	 /* pre-scaler = 1
+	 * number of time quanta = 16
+	 * segment 1 = 13
+	 * segment 2 = 2
+	 * SJW = 1
+	 */
+	CAN1 ->BTR &= 0x00000000U;
+	CAN1 ->BTR |= (1U << 24);//SWj
+	CAN1 ->BTR |= (0xDU << 16);//seg1
+	CAN1 ->BTR |= (2U << 20);//seg2
+	CAN1 ->BTR |= (1U << 0);//BRP
+	//configure the mailbox
+	CAN1 ->sTxMailBox[0].TIR &= 0x00000000U;
+	CAN1 ->sTxMailBox[0].TIR |= (ID << 21);//ID
+	CAN1 ->sTxMailBox[0].TIR &= ~(1U << 1);//RTR
+	CAN1 ->sTxMailBox[0].TIR &= ~(1U << 2);//IDE
+	CAN1 ->sTxMailBox[0].TDTR |= (size << 0);//data size
+	CAN1 ->sTxMailBox[0].TDLR = (uint32_t)message;
+	//enter normal mode
+	CAN1 ->MCR &= ~(1 << 0);
+	//wait until CAN is in normal mode
+	while(CAN1 ->MSR & (1 << 0));
+	//request to send
+	CAN1 ->sTxMailBox[0].TIR |= (1 << 0);
+	while(1){
+
+	}
+}
+

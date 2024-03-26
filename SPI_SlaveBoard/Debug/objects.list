@@ -1,0 +1,7 @@
+"./BSP/bsp.o"
+"./Drivers/GPIO_DRIVERS/GPIO_driver.o"
+"./Drivers/SPI_DRIVER/SPI_driver.o"
+"./Src/Slave_receiveData.o"
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Startup/startup_stm32f446retx.o"

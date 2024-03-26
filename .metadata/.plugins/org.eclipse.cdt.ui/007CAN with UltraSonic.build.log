@@ -1,0 +1,17 @@
+21:42:48 **** Incremental Build of configuration Debug for project 007CAN with UltraSonic ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/receive.c" -mcpu=cortex-m4 -std=gnu18 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I"E:/MCU1/007CAN with UltraSonic/Drivers/GPIO_DRIVERS" -I"E:/MCU1/007CAN with UltraSonic/Drivers/RTC" -I"E:/MCU1/007CAN with UltraSonic/Drivers/Timer_Driver" -I"E:/MCU1/007CAN with UltraSonic/Drivers/USART_Driver" -I"E:/MCU1/007CAN with UltraSonic/Drivers/I2C_Driver" -I"E:/MCU1/007CAN with UltraSonic/Drivers/stm32f446re" -I"E:/MCU1/007CAN with UltraSonic/Drivers/SPI_DRIVER" -I"E:/MCU1/007CAN with UltraSonic/BSP" -I../Inc -I"E:/MCU1/007CAN with UltraSonic/Drivers/RCC_Driver" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/receive.d" -MT"Src/receive.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/receive.o"
+arm-none-eabi-gcc -o "007CAN with UltraSonic.elf" @"objects.list"  -lrdimon -mcpu=cortex-m4 -T"E:\MCU1\007CAN with UltraSonic\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="007CAN with UltraSonic.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 007CAN with UltraSonic.elf
+ 
+arm-none-eabi-size   007CAN\ with\ UltraSonic.elf 
+arm-none-eabi-objdump -h -S  007CAN\ with\ UltraSonic.elf  > "007CAN with UltraSonic.list"
+   text	   data	    bss	    dec	    hex	filename
+  22332	    488	   1928	  24748	   60ac	007CAN with UltraSonic.elf
+Finished building: default.size.stdout
+ 
+Finished building: 007CAN with UltraSonic.list
+ 
+
+21:42:52 Build Finished. 0 errors, 0 warnings. (took 3s.626ms)
+

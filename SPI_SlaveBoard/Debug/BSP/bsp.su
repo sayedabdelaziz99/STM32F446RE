@@ -1,0 +1,4 @@
+../BSP/bsp.c:10:6:systick_init	4	static
+../BSP/bsp.c:18:6:SPI2_GPIOInit	32	static
+../BSP/bsp.c:29:6:SysTick_Handler	8	static
+../BSP/bsp.c:33:6:delay	24	static

@@ -1,0 +1,16 @@
+/*
+ * RTC.h
+ *
+ *  Created on: Mar 22, 2024
+ *      Author: Sayed
+ */
+
+#ifndef RTC_RTC_DRIVER_H_
+#define RTC_RTC_DRIVER_H_
+#include "I2C_driver.h"
+
+void RTC_ReadTime(I2C_Handle *pI2CHandle,uint8_t *pDataBuffer);
+void I2C_SetTime(void);
+void I2C_init(void);
+
+#endif /* RTC_RTC_DRIVER_H_ */

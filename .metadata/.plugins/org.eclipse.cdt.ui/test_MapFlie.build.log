@@ -1,0 +1,10 @@
+19:22:41 **** Incremental Build of configuration Debug for project test_MapFlie ****
+make -j8 all 
+arm-none-eabi-size   test_MapFlie.elf 
+   text	   data	    bss	    dec	    hex	filename
+    872	     16	   1576	   2464	    9a0	test_MapFlie.elf
+Finished building: default.size.stdout
+ 
+
+19:22:41 Build Finished. 0 errors, 0 warnings. (took 266ms)
+

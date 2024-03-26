@@ -1,0 +1,17 @@
+00:54:23 **** Incremental Build of configuration Debug for project CAN test ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu18 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I"E:/MCU1/CAN test/Drivers/GPIO_DRIVERS" -I"E:/MCU1/CAN test/Drivers/Timer_Driver" -I"E:/MCU1/CAN test/Drivers/USART_Driver" -I"E:/MCU1/CAN test/Drivers/I2C_Driver" -I"E:/MCU1/CAN test/Drivers/stm32f446re" -I"E:/MCU1/CAN test/Drivers/SPI_DRIVER" -I"E:/MCU1/CAN test/BSP" -I../Inc -I"E:/MCU1/CAN test/Drivers/RCC_Driver" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "CAN test.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\MCU1\CAN test\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CAN test.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CAN test.elf
+ 
+arm-none-eabi-size   CAN\ test.elf 
+arm-none-eabi-objdump -h -S  CAN\ test.elf  > "CAN test.list"
+   text	   data	    bss	    dec	    hex	filename
+   3636	     12	   1620	   5268	   1494	CAN test.elf
+Finished building: default.size.stdout
+ 
+Finished building: CAN test.list
+ 
+
+00:54:24 Build Finished. 0 errors, 0 warnings. (took 817ms)
+

@@ -1,0 +1,15 @@
+../Drivers/I2C_Driver/I2C_Driver.c:24:6:I2C_Enable	16	static
+../Drivers/I2C_Driver/I2C_Driver.c:46:6:I2C_CLKCNT	16	static
+../Drivers/I2C_Driver/I2C_Driver.c:60:6:I2C_Init	32	static
+../Drivers/I2C_Driver/I2C_Driver.c:147:6:I2C_DeInit	16	static
+../Drivers/I2C_Driver/I2C_Driver.c:153:9:I2C_GetFlagStatus	16	static
+../Drivers/I2C_Driver/I2C_Driver.c:161:6:I2C_MasterSendData	24	static
+../Drivers/I2C_Driver/I2C_Driver.c:198:6:I2C_MasterRecieveData	32	static
+../Drivers/I2C_Driver/I2C_Driver.c:251:6:I2C_SLaveSendData	24	static
+../Drivers/I2C_Driver/I2C_Driver.c:254:6:I2C_SlaveRecieveData	24	static
+../Drivers/I2C_Driver/I2C_Driver.c:275:6:I2C_IRQInterruptConfig	16	static
+../Drivers/I2C_Driver/I2C_Driver.c:279:6:I2C_IRQPriorityConfig	16	static
+../Drivers/I2C_Driver/I2C_Driver.c:283:14:I2C_GenerateStartCondition	16	static
+../Drivers/I2C_Driver/I2C_Driver.c:287:13:I2C_ExecuteAddressPhaseWrite	24	static
+../Drivers/I2C_Driver/I2C_Driver.c:296:13:I2C_ClearADDRFlag	24	static
+../Drivers/I2C_Driver/I2C_Driver.c:307:16:I2C_GenerateDataReceiving	16	static

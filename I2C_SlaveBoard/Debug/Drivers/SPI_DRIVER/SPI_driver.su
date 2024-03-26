@@ -1,0 +1,12 @@
+../Drivers/SPI_DRIVER/SPI_driver.c:24:6:SPI_CLKCNT	16	static
+../Drivers/SPI_DRIVER/SPI_driver.c:58:6:SPI_Init	24	static
+../Drivers/SPI_DRIVER/SPI_driver.c:114:6:SPI_DeInit	16	static
+../Drivers/SPI_DRIVER/SPI_driver.c:138:9:GetFlagStatus	16	static
+../Drivers/SPI_DRIVER/SPI_driver.c:144:6:SPI_SendData	32	static
+../Drivers/SPI_DRIVER/SPI_driver.c:184:6:SPI_ReceiveData	24	static
+../Drivers/SPI_DRIVER/SPI_driver.c:209:6:SPI_IRQInterruptConfig	16	static
+../Drivers/SPI_DRIVER/SPI_driver.c:213:6:SPI_IRQPriorityConfig	16	static
+../Drivers/SPI_DRIVER/SPI_driver.c:217:6:SPI_IRQHandling	16	static
+../Drivers/SPI_DRIVER/SPI_driver.c:221:6:SPI_Enable	16	static
+../Drivers/SPI_DRIVER/SPI_driver.c:229:6:SSI_Enable	16	static
+../Drivers/SPI_DRIVER/SPI_driver.c:237:6:SSOE_Enable	16	static

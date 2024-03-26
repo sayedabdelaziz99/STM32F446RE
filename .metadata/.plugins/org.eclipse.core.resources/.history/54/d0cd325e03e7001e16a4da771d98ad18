@@ -1,0 +1,169 @@
+/*
+ * main.c
+ *
+ *  Created on: Mar 14, 2024
+ *      Author: Sayed
+ */
+#include "GPIO_driver.h"
+#include "RCC_driver.h"
+#include "bsp.h"
+#include "string.h"
+#include "Timer_Driver.h"
+#include <stdio.h>
+
+#define MAX_DISTANCE_TIME	11765U
+
+uint32_t ID = 0x55U;
+GPIO_Handle_t Echo, Trigg, LED;
+BasicTimer_Handle_t Timer1, Timer2;
+uint16_t timer2_Ticks;
+
+
+static void CANTxconfig();
+static void CANInit();
+static void UltraSonicPinConfig();
+static void TimerConfig();
+
+
+int main(void){
+	/*initializing the pins for CAN bus*/
+	GPIO_CAN1Init(GPIOA, GPIO_PIN_NO_11, 9);
+	GPIO_CAN1Init(GPIOA, GPIO_PIN_NO_12, 9);
+	/*initializing the CAN bus*/
+	CANInit();
+	CANTxconfig();
+
+	/*initialize ultraSonic Pins*/
+	UltraSonicPinConfig();
+	/*configure the timers*/
+	TimerConfig();
+	/*initialize the Timers*/
+	BasicTimerInit(&Timer1);
+	BasicTimerInit(&Timer2);
+	/*initialize the SysTick*/
+	systick_init(Ticks);
+
+	/*initializing interrupts for Timer1, Timer2 and Echo pin*/
+	GPIO_IRQInterruptConfig(IRQ_TIM6_DAC, ENABLE);
+	GPIO_IRQInterruptConfig(IRQ_TIM7, ENABLE);
+	GPIO_IRQInterruptConfig(IRQ_EXTI5_9, ENABLE);
+
+	/*setting the priority for the ISRs*/
+	GPIO_IRQPriorityConfig(IRQ_TIM6_DAC, 1);
+	GPIO_IRQPriorityConfig(IRQ_TIM7, 2);
+	GPIO_IRQPriorityConfig(IRQ_EXTI5_9, 3);
+	//enter normal mode
+	CAN1 ->MCR &= ~(1 << 0);
+	//wait until CAN is in normal mode
+	while(CAN1 ->MSR & (1 << 0));
+
+	while(1){
+		delay(1U);
+		TimerStart(Timer1.pTIMx, ENABLE);
+		GPIO_ToggleOutputPin(Trigg.pGPIOx, Trigg.GPIO_PinConfig.GPIO_PinNumber);
+	}
+}
+
+static void CANInit(){
+	//enable the clock for the bus
+	RCC ->APB1ENR |= (1 << RCC_APB1ENR_CAN1EN);
+	//clear sleep bit in MCR
+	CAN1 ->MCR &= ~(1U << 1);
+	//initialize the CAN bus
+	CAN1 ->MCR |= (1 << 0);
+	//wait until CAN enters initialization mode
+	while(! (CAN1 ->MSR & (1 << 0)));
+	//configure the timings
+	 /* pre-scaler = 1
+	 * number of time quanta = 16
+	 * segment 1 = 13
+	 * segment 2 = 2
+	 * SJW = 1
+	 */
+	CAN1 ->BTR &= 0x00000000U;
+	CAN1 ->BTR |= (1U << 24);//SWj
+	CAN1 ->BTR |= (13U << 16);//seg1
+	CAN1 ->BTR |= (2U << 20);//seg2
+	CAN1 ->BTR |= (2U << 0);//BRP
+}
+
+
+static void UltraSonicPinConfig(){
+	/*configure the echo pin*/
+	Echo.pGPIOx = GPIOA;
+	Echo.GPIO_PinConfig.GPIO_PinNumber =  GPIO_PIN_NO_8;
+	Echo.GPIO_PinConfig.GPIO_PinMode   =  GPIO_MODE_IT_RFT;
+	Echo.GPIO_PinConfig.GPIO_PinSpeed  =  GPIO_SPEED_FAST;
+	Echo.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+	Echo.GPIO_PinConfig.GPIO_PinPuPdControl  = GPIO_NO_PUPD;
+
+	/*configure the Trigg Pin*/
+	Trigg.pGPIOx = GPIOA;
+	Trigg.GPIO_PinConfig.GPIO_PinNumber =  GPIO_PIN_NO_9;
+	Trigg.GPIO_PinConfig.GPIO_PinMode   =  GPIO_MODE_OUT;
+	Trigg.GPIO_PinConfig.GPIO_PinSpeed  =  GPIO_SPEED_FAST;
+	Trigg.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+	Trigg.GPIO_PinConfig.GPIO_PinPuPdControl  = GPIO_NO_PUPD;
+	GPIO_CLKCNT(GPIOA,ENABLE);
+	GPIO_Init(&Echo);
+	GPIO_Init(&Trigg);
+}
+
+
+static void TimerConfig(){
+	/*configure timer1*/
+	Timer1.pTIMx = TIM6;
+	Timer1.config.InterruptEnorDi = ENABLE;
+	Timer1.config.PreScalerVal = 15U;
+	Timer1.config.AutoReloadVal = 9U;
+
+	/*configure timer2*/
+	Timer2.pTIMx = TIM7;
+	Timer2.config.AutoReloadVal = MAX_DISTANCE_TIME;
+	Timer2.config.PreScalerVal  = 15U;
+}
+
+static void CANTxconfig(){
+	//configure the mailbox
+	CAN1 ->sTxMailBox[0].TIR &= 0x00000000U;
+	CAN1 ->sTxMailBox[0].TIR |= (ID << 21);//ID
+	CAN1 ->sTxMailBox[0].TIR &= ~(1U << 1);//RTR
+	CAN1 ->sTxMailBox[0].TIR &= ~(1U << 2);//IDE
+	CAN1 ->sTxMailBox[0].TDTR &= 0x00000000U;
+	CAN1 ->sTxMailBox[0].TDLR &= 0x00000000U;
+	CAN1 ->sTxMailBox[0].TDHR &= 0x00000000U;
+}
+
+void TIM6_DAC_IRQHandler(){
+	__asm(
+			"CPSID I	\n"
+	);
+	TimerStart(Timer1.pTIMx, DISABLE);
+	Timer1.pTIMx->SR &= ~(1 << TIM_SR_UIF);
+	GPIO_ToggleOutputPin(Trigg.pGPIOx, Trigg.GPIO_PinConfig.GPIO_PinNumber);
+	__asm(
+			"CPSIE I	\n"
+	);
+}
+
+void EXTI9_5_IRQHandler(){
+	__asm(
+			"CPSID I	\n"
+	);
+	EXTI->PR |= (1 << Echo.GPIO_PinConfig.GPIO_PinNumber);
+	if(GPIO_ReadFromInputPin(Echo.pGPIOx, Echo.GPIO_PinConfig.GPIO_PinNumber) == 1U){
+		TimerStart(Timer2.pTIMx, ENABLE);
+	}else{
+		TimerStart(Timer2.pTIMx, DISABLE);
+		Timer2.pTIMx->SR &= ~(1 << TIM_SR_UIF);
+		timer2_Ticks = Timer2.pTIMx->CNT;
+		Timer2.pTIMx->CNT = 0U;
+		CAN1 ->sTxMailBox[0].TDTR |= (sizeof(timer2_Ticks) << 0);//data size
+		CAN1 ->sTxMailBox[0].TDLR = timer2_Ticks;
+		//request to send
+		CAN1 ->sTxMailBox[0].TIR |= (1 << 0);
+	}
+	__asm(
+			"CPSIE I	\n"
+	);
+}

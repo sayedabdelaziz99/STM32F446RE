@@ -1,0 +1,9 @@
+../Src/receive.c:37:5:main	56	static
+../Src/receive.c:76:13:CANInit	4	static
+../Src/receive.c:92:13:CANRxconfig	4	static
+../Src/receive.c:116:13:UARTConfig	8	static
+../Src/receive.c:126:13:shift	24	static
+../Src/receive.c:134:13:I2C_Config	16	static
+../Src/receive.c:147:6:CAN1_RX0_IRQHandler	16	static,ignoring_inline_asm
+../Src/receive.c:160:13:ReadFIFO	16	static
+../Src/receive.c:174:6:SysTick_Handler	8	static,ignoring_inline_asm

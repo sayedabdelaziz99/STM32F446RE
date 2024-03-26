@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;005STM32_Drivers/Src/009USART_InterruptSendData.c&apos; to &apos;009SPI_InterruptSendData.c&apos;" description="Rename resource &apos;009USART_InterruptSendData.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Src/009USART_InterruptSendData.c" name="009SPI_InterruptSendData.c" stamp="1708289549004" updateReferences="true"/>
+</session>

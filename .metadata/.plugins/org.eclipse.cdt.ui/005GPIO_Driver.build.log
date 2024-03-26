@@ -1,0 +1,22 @@
+17:56:00 **** Incremental Build of configuration Debug for project 005GPIO_Driver ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/005master_SysTickSendData.c" -mcpu=cortex-m4 -std=gnu18 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I"E:/MCU1/005GPIO_Driver/Drivers/GPIO_DRIVERS" -I"E:/MCU1/005GPIO_Driver/Drivers/inc" -I"E:/MCU1/005GPIO_Driver/Drivers/SPI_DRIVER" -I"E:/MCU1/005GPIO_Driver/BSP" -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/005master_SysTickSendData.d" -MT"Src/005master_SysTickSendData.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/005master_SysTickSendData.o"
+../Src/005master_SysTickSendData.c: In function 'main':
+../Src/005master_SysTickSendData.c:30:3: warning: implicit declaration of function 'systick_init'; did you mean 'systic_init'? [-Wimplicit-function-declaration]
+   30 |   systick_init();
+      |   ^~~~~~~~~~~~
+      |   systic_init
+arm-none-eabi-gcc -o "005GPIO_Driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\MCU1\005GPIO_Driver\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="005GPIO_Driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 005GPIO_Driver.elf
+ 
+arm-none-eabi-size   005GPIO_Driver.elf 
+arm-none-eabi-objdump -h -S  005GPIO_Driver.elf  > "005GPIO_Driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   3092	      8	   1568	   4668	   123c	005GPIO_Driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: 005GPIO_Driver.list
+ 
+
+17:56:01 Build Finished. 0 errors, 1 warnings. (took 750ms)
+

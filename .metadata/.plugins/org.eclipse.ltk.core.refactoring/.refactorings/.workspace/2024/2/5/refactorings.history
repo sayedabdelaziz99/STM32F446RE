@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;005GPIO_Driver&apos;" deleteContents="false" description="Delete resource &apos;005GPIO_Driver&apos;" element1="/005GPIO_Driver" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1706875838313"/>&#x0A;<refactoring comment="Delete resource &apos;SPI_SaveBoard&apos;" deleteContents="true" description="Delete resource &apos;SPI_SaveBoard&apos;" element1="/SPI_SaveBoard" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1706876060723"/>
+</session>

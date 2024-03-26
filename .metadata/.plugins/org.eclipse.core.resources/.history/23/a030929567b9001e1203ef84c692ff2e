@@ -1,0 +1,12 @@
+/*
+ * bsp.c
+ *
+ *  Created on: Jan 22, 2024
+ *      Author: Sayed
+ */
+
+#include "bsp.h"
+
+int main(void){
+	return 0;
+}

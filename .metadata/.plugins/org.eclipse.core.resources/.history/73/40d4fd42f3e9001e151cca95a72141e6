@@ -1,0 +1,46 @@
+/*
+ * RTC.c
+ *
+ *  Created on: Mar 22, 2024
+ *      Author: Sayed
+ */
+#include "STMF446RE.h"
+#include "RTC_driver.h"
+#include "I2C_driver.h"
+
+uint8_t SlaveAddress = 0x68U;
+uint8_t StartAdress = 0x00U;
+
+void RTC_ReadTime(uint8_t *pRxBuffer, I2C_Handle *pI2CHandle){
+
+	I2C_MasterSendData(pI2CHandle, &StartAdress, sizeof(StartAdress), SlaveAddress);
+
+	I2C_MasterRecieveData(pI2CHandle, pRxBuffer, 7, SlaveAddress);
+}
+
+void RTC_SetTime(void){
+	uint8_t time[5] = {19, 5, 24,3, ((2 << 4) | 4)};
+	//halt the clock
+	I2C_MasterSendData(pI2CHandle, &(StartAdress + 0x0U), sizeof(StartAdress), SlaveAddress);
+	I2C_MasterSendData(pI2CHandle, (uint8_t *)(0x1 << 7), 1, SlaveAddress);
+	//set the minute
+	I2C_MasterSendData(pI2CHandle, &(StartAdress + 0x1U), sizeof(StartAdress), SlaveAddress);
+	I2C_MasterSendData(pI2CHandle, &time[0], 1, SlaveAddress);
+	//set the hour
+	I2C_MasterSendData(pI2CHandle, &(StartAdress + 0x2U), sizeof(StartAdress), SlaveAddress);
+	I2C_MasterSendData(pI2CHandle, &time[1], 1, SlaveAddress);
+	//set the day
+	I2C_MasterSendData(pI2CHandle, &(StartAdress + 0x3U), sizeof(StartAdress), SlaveAddress);
+	I2C_MasterSendData(pI2CHandle, &time[2], 1, SlaveAddress);
+	//set the month
+	I2C_MasterSendData(pI2CHandle, &(StartAdress + 0x5U), sizeof(StartAdress), SlaveAddress);
+	I2C_MasterSendData(pI2CHandle, &time[3], 1, SlaveAddress);
+	//set the year
+	I2C_MasterSendData(pI2CHandle, &(StartAdress + 0x3U), sizeof(StartAdress), SlaveAddress);
+	I2C_MasterSendData(pI2CHandle, &time[4], 1, SlaveAddress);
+	//release the clock
+	I2C_MasterSendData(pI2CHandle, &(StartAdress + 0x0U), sizeof(StartAdress), SlaveAddress);
+	I2C_MasterSendData(pI2CHandle, (uint8_t *)(0x0 << 7), 1, SlaveAddress);
+}
+
+

@@ -1,0 +1,10 @@
+14:36:12 **** Incremental Build of configuration Debug for project SPI_SaveBoard ****
+make -j8 all 
+arm-none-eabi-size   SPI_SaveBoard.elf 
+   text	   data	    bss	    dec	    hex	filename
+   2788	      8	   1568	   4364	   110c	SPI_SaveBoard.elf
+Finished building: default.size.stdout
+ 
+
+14:36:12 Build Finished. 0 errors, 0 warnings. (took 333ms)
+

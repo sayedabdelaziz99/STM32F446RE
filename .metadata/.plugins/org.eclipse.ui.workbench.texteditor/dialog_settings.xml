@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="true"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<item key="selection" value=""/>
+		<list key="findhistory">
+			<item value="File"/>
+			<item value="SCL Speed"/>
+			<item value="FM Duty Cycle"/>
+			<item value="address modes"/>
+			<item value="SPI"/>
+			<item value="I2S"/>
+			<item value="PLLI2SCFGR"/>
+			<item value="RST"/>
+			<item value="IRQ"/>
+			<item value="TIM6_DAC_IRQHandler"/>
+			<item value="Echo"/>
+			<item value="Echo."/>
+			<item value="pGPIOHandle-&gt;"/>
+			<item value="GPIOLed"/>
+			<item value="Timer_type"/>
+		</list>
+		<list key="replacehistory">
+			<item value="CAN"/>
+			<item value="SAI"/>
+			<item value="PLLSAICFGR"/>
+			<item value="EN"/>
+			<item value="LED"/>
+			<item value="Tringg."/>
+			<item value="Echo."/>
+			<item value="pGPIOHandle"/>
+			<item value="BasicTimer_type"/>
+			<item value="Config"/>
+			<item value="USART_Handle_t"/>
+			<item value="Handle"/>
+			<item value="type"/>
+			<item value="USARTpins"/>
+			<item value="pUSARTx"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="927"/>
+		<item key="DIALOG_Y_ORIGIN" value="185"/>
+		<item key="DIALOG_WIDTH" value="322"/>
+		<item key="DIALOG_HEIGHT" value="391"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+</section>

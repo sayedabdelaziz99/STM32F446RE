@@ -1,0 +1,4 @@
+../BSP/bsp.c:11:6:systick_init	4	static
+../BSP/bsp.c:19:6:SPI2_GPIOInit	32	static
+../BSP/bsp.c:31:6:I2C1_GPIOInit	32	static
+../BSP/bsp.c:44:6:delay	24	static

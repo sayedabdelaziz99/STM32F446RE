@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 12 resources" deleteContents="false" description="Delete 12 resources" element1="/006UltraSonic/Src/009SPI_InterruptSendData.c" element10="/006UltraSonic/Src/007I2C_SysTickSendData.c" element11="/006UltraSonic/Src/008USART_MasterSendData.c" element12="/006UltraSonic/Src/test.c" element2="/006UltraSonic/Src/syscalls.c" element3="/006UltraSonic/Src/sysmem.c" element4="/006UltraSonic/Src/001Led&amp;Button.c" element5="/006UltraSonic/Src/002interrupt.c" element6="/006UltraSonic/Src/003SPImaster_ButtonSendData.c" element7="/006UltraSonic/Src/004SPImaster_ButtonInterruptSendData.c" element8="/006UltraSonic/Src/005SPImaster_SysTickSendData.c" element9="/006UltraSonic/Src/006I2C_MasterSendData.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="12" stamp="1710412019309"/>
+</session>

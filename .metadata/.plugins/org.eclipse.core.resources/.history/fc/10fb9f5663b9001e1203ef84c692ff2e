@@ -1,0 +1,105 @@
+/*
+ * bsp.h
+ *	@brief: this is a Board Supported Package for stm32F446RF
+ *  Created on: Jan 22, 2024
+ *      Author: Sayed
+ */
+
+#ifndef INC_BSP_H_
+#define INC_BSP_H_
+
+/*BASE addresses of flash and ram memory*/
+#define FLASH_BASEADRR			((uint32_t *)0x08000000U)
+#define SRAM1_BASEADDR			((uint32_t *)0x20000000U)
+#define SRAM2_BASEADDR			((uint32_t *)0x2001C000U)
+#define ROM_BASEADDR			((uint32_t *)0x1FFF0000U)
+#define RAM_BASEADDR   			SRAM1_BASEADDR
+
+/*Base addresses of the different BUSEs in the MCU*/
+#define BUSPREF_BASEADDR   		((uint32_t *)0x40000000U)
+#define ABP1PREF_BASEADDR  		BUSPREF_BASEADDR
+#define APB2PREF_BASEADDR  		((uint32_t *)0x40010000U)
+#define AHB1PREF_BASEADDR  		((uint32_t *)0x40020000U)
+#define AHB2PREF_BASEADDR  		((uint32_t *)0x50000000U)
+#define AHB3PREF_BASEADDR  		((uint32_t *)0xA0001000U)
+
+/*Peripherals connected to the ABP1 BUS*/
+#define TIM2_BASEADDR			((uint32_t *)0x40000000U)
+#define TIM3_BASEADDR   		((uint32_t *)0x40000400U)
+#define TIM4_BASEADDR			((uint32_t *)0x40000800U)
+#define TIM5_BASEADDR   		((uint32_t *)0x40000C00U)
+#define TIM6_BASEADDR   		((uint32_t *)0x40001000U)
+#define TIM7_BASEADDR   		((uint32_t *)0x40001400U)
+#define TIM12_BASEADDR  		((uint32_t *)0x40001800U)
+#define TIM13_BASEADDR  		((uint32_t *)0x40001C00U)
+#define TIM14_BASEADDR  		((uint32_t *)0x40002000U)
+#define RTCBKP_BASEADDR 		((uint32_t *)0x40002800U)
+#define WWDG_BASEADDR			((uint32_t *)0x40002C00U)
+#define IWDG_BASEADDR   		((uint32_t *)0x40003000U)
+#define SPI2I2S2_BASEADDR 		((uint32_t *)0x40003800U)
+#define SPI3I2S3_BASEADDR 		((uint32_t *)0x40003C00U)
+#define SPDIFRX_BASEADDR 		((uint32_t *)0x40004000U)
+#define USART2_BASEADDR  		((uint32_t *)0x40004400U)
+#define USART3_BASEADDR  		((uint32_t *)0x40004800U)
+#define UART2_BASEADDR  		((uint32_t *)0x40004C00U)
+#define UART5_BASEADDR  		((uint32_t *)0x40005000U)
+#define I2C1_BASEADDR 			((uint32_t *)0x40005400U)
+#define I2C2_BASEADDR  			((uint32_t *)0x40005800U)
+#define I2C3_BASEADDR  			((uint32_t *)0x40005C00U)
+#define FMPI2C1_BASEADDR 		((uint32_t *)0x40006000u)
+#define CAN1_BASEADDR 			((uint32_t *)0x40006400U)
+#define CAN2_BASEADDR 			((uint32_t *)0x40006800U)
+#define HDMICEC_BASEADDR 		((uint32_t *)0x40006C00U)
+#define PWE_BASEADDR 			((uint32_t *)0x40007000U)
+#define DAC_BASEADDR  			((uint32_t *)0x40007400U)
+
+/*Peripherals connected to the ABP2 BUS*/
+#define TIM1_BASEADDR 			((uint32_t *)0x40010000U)
+#define TIM8_BASEADDR  			((uint32_t *)0x40010400U)
+#define USART1_BASEADDR 		((uint32_t *)0x40011000U)
+#define USART6_BASEADDR 		((uint32_t *)0x40011400U)
+#define ADC123_BASEADDR 		((uint32_t *)0x40012000U)
+#define SDI0_BASEADDR 			((uint32_t *)0x40012C00U)
+#define SPI1_BASEADDR 			((uint32_t *)0x40013000U)
+#define SPI4_BASEADDR 			((uint32_t *)0x40013400U)
+#define SYSCFG_BASEADDR 		((uint32_t *)0x40013800U)
+#define EXTI_BASEADDR 			((uint32_t *)0x40013C00U)
+#define TIM9_BASEADDR 			((uint32_t *)0x40014000U)
+#define TIM10_BASEADDR 			((uint32_t *)0x40014400U)
+#define TIM11_BASEADDR 			((uint32_t *)0x40014800U)
+#define SAI1_BASEADDR 			((uint32_t *)0x40015800U)
+#define SAI2_BASEADDR 			((uint32_t *)0x40015C00U)
+
+/*Peripherals connected to the AHP1 BUS*/
+#define GPIOA_BASEADDR 			((uint32_t *)0x40020000U)
+#define GPIOB_BASEADDR 			((unit32_t *)0x40020400U)
+#define GPIOC_BASEADDR 			((uint32_t *)0x40020800U)
+#define GPIOD_BASEADDR 			((uint32_t *)0x40020C00U)
+#define GPIOE_BASEADDR 			((uint32_t *)0x40021000U)
+#define GPIOF_BASEADDR 			((uint32_t *)0x40021400U)
+#define GPIOG_BASEADDR 			((uint32_t *)0x40021800U)
+#define GPIOH_BASEADDR 			((uint32_t *)0x40021C00U)
+#define CRC_BASEADDR 			((uint32_t *)0x40023000U)
+#define RCC_BASEADDR 			((uint32_t *)0x40023800U)
+#define FLASHINTRE_BASEADDR 	((uint32_t *)0x40023C00U)
+#define BKPSRAM_BASEADDR 		((uint32_t *)0x40024000U)
+#define DMA1_BASEADDR 			((uint32_t *)0x40026000U)
+#define DMA2_BASEADDR 			((uint32_t *)0x40026400U)
+#define USBOTGHS_BASEARRD 		((uint32_t *)0x40040000U)
+
+/*Peripherals connected to the AHP2 BUS*/
+#define USBOTGFS_BASEADDR 		((uint32_t *)0x50000000U)
+#define DCMI_BASEADDR 			((uint32_t *)0x50050000U)
+
+/*Peripherals connected to the AHP3 BUS*/
+#define FMCBANK1_BASEADDR 		((uint32_t *)0x60000000U)
+#define FMCBANK3_BASEADDR 		((uint32_t *)0x80000000U)
+#define QUADSPI_BASEADDR  		((uint32_t *)0x90000000U)
+#define FMCCNTRE_BASEADDR 		((uint32_t *)0xA0000000U)
+#define QUADSPICNTRE_BASEADDR 	((uint32_t *)0xA0001000U)
+#define FMCBANK5_BASEADDR 		((uint32_t *)0xC0000000U)
+#define FMC6BANK_BASEADDR 		((uint32_t *)0xD0000000U)
+#define M4INTPREF_BASEADDR 		((uint32_t *)0xE0000000U)
+
+
+#endif /* INC_BSP_H_ */

@@ -1,0 +1,38 @@
+/*
+ * rtc.c
+ *
+ *  Created on: Mar 22, 2024
+ *      Author: Sayed
+ */
+
+#include "GPIO_driver.h"
+#include "I2C_driver.h"
+#include "RTC_driver.h"
+#include "bsp.h"
+
+static void I2C_Config();
+
+int main(void){
+	I2C1_GPIOInit(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t ALTFN_Mode)
+	I2C_init();
+	//I2C_SetTime();
+	uint8_t data[7];
+	while(1){
+		delay(50);
+		RTC_ReadTime(data);
+	}
+}
+
+
+static void I2C_config(){
+	I2C1_GPIOInit(GPIOB, GPIO_PIN_NO_6, 4);
+	I2C1_GPIOInit(GPIOB, GPIO_PIN_NO_7, 4);
+
+	I2C_Handle RTC;
+	RTC.pI2Cx = I2C1;
+	RTC.I2C_Config.I2C_ACKControl = I2C_ACK_ENABLE;
+	RTC.I2C_Config.I2C_AddressMode = I2C_AddressMode_7bit;
+	RTC.I2C_Config.I2C_SCLSpeed = I2C_SCL_SM;
+	I2C_CLKCNT(RTC->pI2Cx, ENABLE);
+	I2C_Init(&RTC);
+}

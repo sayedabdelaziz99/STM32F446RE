@@ -1,0 +1,7 @@
+Networked Nucleo: Sensor Monitoring, Actuation and logging via CAN Bus.
+in this project, one board is connected to an ultrasonic sensor and sends the ditance measures in a cyclic pattern to the other board via CAN Bus
+the other board is connected to an RTC, with each mailbox received via the can bus...the frequency at which the LED is being toggled is increased 
+with the decrease in distance.
+An RTC is connected to the board over I2C bus, and with each mailbox received the timer at which it is received gets measured and printed over
+USART
+A python script is made to open the COM port 2 and logg the data in an SCV file

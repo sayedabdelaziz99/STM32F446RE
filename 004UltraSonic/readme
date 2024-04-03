@@ -1,0 +1,3 @@
+this project is a parcking sensor alike 
+The UltraSonic sensor is connected to the Board and used to measure the distance 
+with the decrease in distance the rate at which the LED is blinking is increased

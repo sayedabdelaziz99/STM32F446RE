@@ -1,3 +1,0 @@
-../Drivers/RCC_Driver/RCC_driver.c:13:10:getSystemClock	32	static
-../Drivers/RCC_Driver/RCC_driver.c:51:10:getAHBClock	24	static
-../Drivers/RCC_Driver/RCC_driver.c:63:10:getAPBClock	24	static

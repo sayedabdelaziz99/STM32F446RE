@@ -1,0 +1,2 @@
+this project aim to send the data back and forth between two nucleo-f446re boards using different communication protocols such as SPI, USART and I2C
+inside the Src file, there are some .C files that contain source code for the different methods used to send the data

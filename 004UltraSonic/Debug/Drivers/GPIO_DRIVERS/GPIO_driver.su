@@ -1,0 +1,12 @@
+../Drivers/GPIO_DRIVERS/GPIO_driver.c:22:6:GPIO_CLKCNT	16	static
+../Drivers/GPIO_DRIVERS/GPIO_driver.c:61:16:GPIO_PORTCODE	24	static
+../Drivers/GPIO_DRIVERS/GPIO_driver.c:80:6:GPIO_Init	32	static
+../Drivers/GPIO_DRIVERS/GPIO_driver.c:165:6:GPIO_DeInit	16	static
+../Drivers/GPIO_DRIVERS/GPIO_driver.c:193:9:GPIO_ReadFromInputPin	24	static
+../Drivers/GPIO_DRIVERS/GPIO_driver.c:217:17:GPIO_ReadFromInputPort	16	static
+../Drivers/GPIO_DRIVERS/GPIO_driver.c:237:6:GPIO_WriteToOutputPin	16	static
+../Drivers/GPIO_DRIVERS/GPIO_driver.c:266:13:GPIO_WriteToOutputPort	16	static
+../Drivers/GPIO_DRIVERS/GPIO_driver.c:286:13:GPIO_ToggleOutputPin	16	static
+../Drivers/GPIO_DRIVERS/GPIO_driver.c:307:6:GPIO_IRQInterruptConfig	16	static
+../Drivers/GPIO_DRIVERS/GPIO_driver.c:348:6:GPIO_IRQPriorityConfig	24	static
+../Drivers/GPIO_DRIVERS/GPIO_driver.c:369:6:GPIO_IRQHandling	16	static

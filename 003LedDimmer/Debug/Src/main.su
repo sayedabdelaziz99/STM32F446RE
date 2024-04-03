@@ -1,0 +1,11 @@
+../Src/main.c:29:5:main	16	static
+../Src/main.c:56:6:SysTick_Handler	4	static
+../Src/main.c:60:13:timer_setup	8	static
+../Src/main.c:79:13:timer_set_mode	24	static
+../Src/main.c:85:13:timer_set_oc_mode	4	static
+../Src/main.c:94:20:timer_enable_counter	4	static
+../Src/main.c:99:20:timer_enable_oc_output	4	static
+../Src/main.c:103:20:timer_set_period	16	static
+../Src/main.c:106:20:timer_set_prescaler	16	static
+../Src/main.c:110:13:SetDuty	24	static
+../Src/main.c:115:20:timer_set_oc_value	16	static

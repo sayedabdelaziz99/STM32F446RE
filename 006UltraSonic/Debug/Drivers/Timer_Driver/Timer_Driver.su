@@ -1,3 +1,0 @@
-../Drivers/Timer_Driver/Timer_Driver.c:10:6:TimerStart	16	static
-../Drivers/Timer_Driver/Timer_Driver.c:19:13:TimerClkEnable	16	static
-../Drivers/Timer_Driver/Timer_Driver.c:29:6:BasicTimerInit	16	static

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;SPI_SaveBoard/Src/main.c&apos; to &apos;Slave_receiveData.c&apos;" description="Rename resource &apos;main.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Src/main.c" name="Slave_receiveData.c" stamp="1706621539808" updateReferences="true"/>
-</session>

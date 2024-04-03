@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;005GPIO_Driver/Driver/inc/bsp.h&apos; to &apos;STMF446RE.h&apos;" description="Rename resource &apos;bsp.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Driver/inc/bsp.h" name="STMF446RE.h" stamp="1706016101540" updateReferences="true"/>
-</session>

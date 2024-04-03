@@ -1,2 +1,0 @@
-../Drivers/RTC/RTC_driver.c:14:6:RTC_ReadTime	16	static
-../Drivers/RTC/RTC_driver.c:21:6:RTC_SetTime	32	static

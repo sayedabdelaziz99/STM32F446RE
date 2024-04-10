@@ -1,0 +1,9 @@
+../BSP/bsp.c:11:6:systick_init	16	static
+../BSP/bsp.c:19:6:SPI2_GPIOInit	32	static
+../BSP/bsp.c:31:6:I2C1_GPIOInit	32	static
+../BSP/bsp.c:45:6:USART_GPIOInit	32	static
+../BSP/bsp.c:59:6:GPIO_ButtonInit	32	static
+../BSP/bsp.c:69:6:GPIO_ButtonInitIT	32	static
+../BSP/bsp.c:81:6:GPIO_CAN1Init	32	static
+../BSP/bsp.c:93:6:GPIO_LEDInit	24	static
+../BSP/bsp.c:104:6:delay	24	static

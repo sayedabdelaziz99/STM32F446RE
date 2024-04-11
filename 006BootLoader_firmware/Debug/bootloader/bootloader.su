@@ -1,2 +1,0 @@
-../bootloader/bootloader.c:11:5:main	8	static
-../bootloader/bootloader.c:20:13:jump_to_main	24	static

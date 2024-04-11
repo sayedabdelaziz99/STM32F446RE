@@ -1,0 +1,6 @@
+../Src/bootloader_app.c:17:5:main	48	static
+../Src/bootloader_app.c:41:13:USART_setup	16	static
+../Src/bootloader_app.c:53:13:USART_taredown	16	static
+../Src/bootloader_app.c:57:13:jump_to_main	24	static
+../Src/bootloader_app.c:65:6:SysTick_Handler	4	static
+../Src/bootloader_app.c:69:13:SysTick_taredown	4	static

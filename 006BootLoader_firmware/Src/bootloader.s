@@ -1,2 +1,2 @@
 .section .BootLoader_section
-  .incbin "../BootLoader_app.bin"
+  .incbin "../bootloader_src/BootLoader_app.bin"

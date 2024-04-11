@@ -16,7 +16,7 @@ static void USART_setup(USART_Handle_t *pUSARTHandle);
 #define SCB_VTOR		((uint32_t *)0xE000ED08U)
 
 
-char data[] = "Hello\r\n";
+char hello[] = "Hello from main application\r\n";
 
 typedef struct RingBuff{
 	uint8_t buffer[RingBufferSize];
@@ -42,10 +42,9 @@ int main(void){
 
 	Ring.read_index = 0;
 	Ring.write_index = 0;
+
+	USART_SendData(&USART, (uint8_t *)hello, sizeof(hello));
 	while(1){
-		/*delay(50);
-		*USART_SendData(&USART, (uint8_t *)data, sizeof(data));
-		*/
 	}
 }
 

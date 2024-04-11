@@ -38,38 +38,37 @@ ENTRY(Reset_Handler)
 /* Highest address of the user mode stack */
 _estack = ORIGIN(RAM) + LENGTH(RAM); /* end of "RAM" Ram type memory */
 
-_Min_Heap_Size = 0x200; /* required amount of heap */
+_Min_Heap_Size = 0x40; /* required amount of heap */
 _Min_Stack_Size = 0x400; /* required amount of stack */
 
 /* Memories definition */
 MEMORY
 {
-  RAM    (xrw)    : ORIGIN = 0x20000000,   LENGTH = 128K
-  FLASH    (rx)    : ORIGIN = 0x8000000,   LENGTH = 512K
+  RAM    (xrw)    : ORIGIN = 0x20000000,	LENGTH = 128K
+  FLASH    (rx)   : ORIGIN = 0x08008000,	LENGTH = 480K
+  BootLoader (rx) : ORIGIN = 0x08000000,	LENGTH = 32k
 }
 
 /* Sections */
 SECTIONS
-{
-  /*the bootloader section*/
+{ 
+  /*bootloader section*/
   .BootLoader_section :
   {
-    . = ALIGN(4);
-  	KEEP(*(.BootLoader_section))
   	. = ALIGN(4);
-  } >FLASH
+  	KEEP(*(.BootLoader_section))
+  } >BootLoader
   
-  /* The startup code into "FLASH" Rom type memory */
+  /*vector table sction*/
   .isr_vector :
   {
-    . = ALIGN(4);
-  	KEEP(*(.isr_vector))
-    . = ALIGN(4);
+	. = ALIGN(4);
+	KEEP(*(.isr_vector))
   } >FLASH
- 
-  /* The program code and other data into "FLASH" Rom type memory */
+  
+   /* The program code and other data into "FLASH" Rom type memory */
   .text :
-  {
+  { 
     . = ALIGN(4);
     *(.text)           /* .text sections (code) */
     *(.text*)          /* .text* sections (code) */
@@ -83,7 +82,7 @@ SECTIONS
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
   } >FLASH
-
+  
   /* Constant data into "FLASH" Rom type memory */
   .rodata :
   {

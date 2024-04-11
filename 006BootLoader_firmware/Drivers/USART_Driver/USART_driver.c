@@ -261,7 +261,28 @@ void USART_PeriClockControl(USART_type *pUSARTx, uint8_t EnorDi)
 	}
 	else
 	{
-		//TODO
+		if(pUSARTx == USART1)
+		{
+			USART1_CLKDI();
+		}else if (pUSARTx == USART2)
+		{
+			USART2_CLKDI();
+		}else if (pUSARTx == USART3)
+		{
+			USART3_CLKDI();
+		}
+		else if (pUSARTx == UART4)
+		{
+			UART4_CLKDI();
+		}
+		else if (pUSARTx == UART5)
+		{
+			UART5_CLKDI();
+		}
+		else if (pUSARTx == USART6)
+		{
+			USART6_CLKDI();
+		}
 	}
 
 }

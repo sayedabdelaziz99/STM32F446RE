@@ -261,7 +261,28 @@ void USART_PeriClockControl(USART_type *pUSARTx, uint8_t EnorDi)
 	}
 	else
 	{
-		//TODO
+		if(pUSARTx == USART1)
+		{
+			USART1_CLKDI();
+		}else if (pUSARTx == USART2)
+		{
+			USART2_CLKDI();
+		}else if (pUSARTx == USART3)
+		{
+			USART3_CLKDI();
+		}
+		else if (pUSARTx == UART4)
+		{
+			UART4_CLKDI();
+		}
+		else if (pUSARTx == UART5)
+		{
+			UART5_CLKDI();
+		}
+		else if (pUSARTx == USART6)
+		{
+			USART6_CLKDI();
+		}
 	}
 
 }
@@ -657,7 +678,7 @@ void USART_IRQHandling(USART_Handle_t *pUSARTHandle)
 				pUSARTHandle->TxLen = 0;
 
 				//Call the application call back with event USART_EVENT_TX_CMPLT
-				USART_ApplicationEventCallback(pUSARTHandle,USART_EVENT_TX_CMPLT);
+				//USART_ApplicationEventCallback(pUSARTHandle,USART_EVENT_TX_CMPLT);
 			}
 		}
 	}
@@ -882,7 +903,7 @@ void USART_IRQHandling(USART_Handle_t *pUSARTHandle)
 				is detected. It is cleared by a software sequence (an read to the USART_SR register
 				followed by a read to the USART_DR register).
 			*/
-			USART_ApplicationEventCallback(pUSARTHandle,USART_ERR_FE);
+			//USART_ApplicationEventCallback(pUSARTHandle,USART_ERR_FE);
 		}
 
 		if(temp1 & ( 1 << USART_SR_NF) )

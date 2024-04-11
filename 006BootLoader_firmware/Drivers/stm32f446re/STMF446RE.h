@@ -334,12 +334,12 @@ typedef struct{
 
 
 /*clock disable macros for USARTs*/
-#define USART1_CLKDI()    (RCC -> APB2ENR |= (1 << 4))
-#define USART2_CLKDI()     (RCC -> APB1ENR |= (1 << 17))
-#define USART3_CLKDI()     (RCC -> APB1ENR |= (1 << 18))
-#define UART4_CLKDI()     (RCC -> APB1ENR |= (1 << 19))
-#define UART5_CLKDI()     (RCC -> APB1ENR |= (1 << 20))
-#define USART6_CLKDI()    (RCC -> APB2ENR |= (1 << 5))
+#define USART1_CLKDI()     (RCC -> APB2ENR  &= ~(1 << 4))
+#define USART2_CLKDI()     (RCC -> APB1ENR  &= ~(1 << 17))
+#define USART3_CLKDI()     (RCC -> APB1ENR  &= ~(1 << 18))
+#define UART4_CLKDI()      (RCC -> APB1ENR  &= ~(1 << 19))
+#define UART5_CLKDI()      (RCC -> APB1ENR  &= ~(1 << 20))
+#define USART6_CLKDI()     (RCC -> APB2ENR  &= ~(1 << 5))
 
 
 /*clock disable macros for SYSCFGs*/

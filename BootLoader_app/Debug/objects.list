@@ -4,5 +4,5 @@
 "./Drivers/RCC_Driver/RCC_driver.o"
 "./Drivers/SPI_DRIVER/SPI_driver.o"
 "./Drivers/USART_Driver/USART_driver.o"
-"./Src/bootloader.o"
+"./Src/bootloader_app.o"
 "./Startup/startup_stm32f446retx.o"
